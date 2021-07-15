@@ -4,6 +4,7 @@ import { Text } from 'react-native';
 import { Divider } from './../../components/General';
 
 import HeaderText from '../../components/HeaderText';
+import TextFieldRow from '../../components/TextFieldRow';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, ImageHolder } from './elements';
@@ -29,6 +30,8 @@ const ContactDetail = ({ navigation, route = {} }) => {
     navigation.goBack();
   };
 
+  const handleTextChanged = () => {};
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: '',
@@ -45,11 +48,34 @@ const ContactDetail = ({ navigation, route = {} }) => {
     <Container>
       <ImageHolder />
       <Header>Main Information</Header>
-      <Text>{firstName}</Text>
-      <Text>{lastName}</Text>
+      <TextFieldRow
+        attribute='firstName'
+        label='First Name'
+        onChangeText={handleTextChanged}
+        defaultText={firstName}
+      />
+      <Divider />
+
+      <TextFieldRow
+        attribute='lastName'
+        label='Last Name'
+        onChangeText={handleTextChanged}
+        defaultText={lastName}
+      />
       <Header>Sub Information</Header>
-      <Text>{email}</Text>
-      <Text>{phone}</Text>
+      <TextFieldRow
+        attribute='email'
+        label='Email'
+        onChangeText={handleTextChanged}
+        defaultText={email}
+      />
+      <Divider />
+      <TextFieldRow
+        attribute='phone'
+        label='Phone'
+        onChangeText={handleTextChanged}
+        defaultText={phone}
+      />
     </Container>
   );
 };
