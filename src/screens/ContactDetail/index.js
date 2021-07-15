@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect } from 'react';
+import React, { useLayoutEffect, useEffect, useRef } from 'react';
 
 import { Text } from 'react-native';
 import { Divider } from './../../components/General';
@@ -51,6 +51,11 @@ const ContactDetail = ({ navigation, route = {} }) => {
     });
   }, [navigation]);
 
+  const firstNameInput = useRef(null);
+  const lastNameInput = useRef(null);
+  const emailInput = useRef(null);
+  const phoneInput = useRef(null);
+
   return (
     <Container>
       <ImageHolder />
@@ -61,6 +66,10 @@ const ContactDetail = ({ navigation, route = {} }) => {
         onChangeText={handleTextChanged}
         defaultText={firstName}
         autoFocus
+        innerRef={firstNameInput}
+        onSubmitEditing={() => {
+          lastNameInput.current.focus();
+        }}
       />
       <Divider />
       <TextFieldRow
@@ -68,6 +77,10 @@ const ContactDetail = ({ navigation, route = {} }) => {
         label='Last Name'
         onChangeText={handleTextChanged}
         defaultText={lastName}
+        innerRef={lastNameInput}
+        onSubmitEditing={() => {
+          emailInput.current.focus();
+        }}
       />
       <Header>Sub Information</Header>
       <TextFieldRow
@@ -75,11 +88,16 @@ const ContactDetail = ({ navigation, route = {} }) => {
         label='Email'
         onChangeText={handleTextChanged}
         defaultText={email}
+        innerRef={emailInput}
+        onSubmitEditing={() => {
+          phoneInput.current.focus();
+        }}
       />
       <Divider />
       <TextFieldRow
         attribute='phone'
         label='Phone'
+        innerRef={phoneInput}
         onChangeText={handleTextChanged}
         defaultText={phone}
       />

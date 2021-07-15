@@ -15,7 +15,9 @@ export const Label = styled.Text`
   margin-left: 10px;
 `;
 
-export const TextField = styled((props) => <TextInput {...props} />)`
+export const TextField = styled((props) => (
+  <TextInput ref={props.innerRef} {...props} />
+))`
   flex: 5;
   font-size: 16px;
   border: lightgray;

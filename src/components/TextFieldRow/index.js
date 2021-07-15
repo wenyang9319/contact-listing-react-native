@@ -7,12 +7,14 @@ const TextFieldRow = ({
   attribute,
   defaultText,
   onChangeText,
+  innerRef,
   ...props
 }) => {
   return (
     <Container>
       <Label>{label}</Label>
       <TextField
+        innerRef={innerRef}
         value={defaultText}
         onChangeText={(text) => onChangeText(attribute, text)}
         {...props}
