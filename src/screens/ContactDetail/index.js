@@ -60,6 +60,7 @@ const ContactDetail = ({ navigation, route = {} }) => {
         label='First Name'
         onChangeText={handleTextChanged}
         defaultText={firstName}
+        autoFocus
       />
       <Divider />
       <TextFieldRow

@@ -9,4 +9,5 @@ export const Container = styled.View`
 export const Divider = styled.View`
   background-color: #e2e2e2;
   height: 1px;
+  margin-horizontal: 15px;
 `;
