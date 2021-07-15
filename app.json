@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "interview-test",
+    "slug": "interview-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "interview-test"
+}
