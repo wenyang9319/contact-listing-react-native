@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { FlatList } from 'react-native';
 import { Container, Divider } from './../../components/General';
 
@@ -7,7 +7,11 @@ import { refreshList } from './../../store/contactSlice';
 
 import ContactRow from './../../components/ContactRow';
 
-export default function App() {
+import HeaderImage from '../../components/HeaderImage';
+import AddImage from '../../assets/images/add.png';
+import SearchImage from '../../assets/images/search.png';
+
+const ContactList = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
   const dispatch = useDispatch();
   const { contacts } = useSelector((state) => state.contact);
@@ -22,7 +26,31 @@ export default function App() {
     handleReload();
   }, []);
 
-  const handleOnPress = () => {};
+  const handleOnAddButtonClicked = () => {};
+
+  const handleOnSearchButtonClicked = () => {};
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Contacts',
+      headerLeft: () => (
+        <HeaderImage
+          image={SearchImage}
+          handleOnPress={handleOnSearchButtonClicked}
+        />
+      ),
+      headerRight: () => (
+        <HeaderImage
+          image={AddImage}
+          handleOnPress={handleOnAddButtonClicked}
+        />
+      ),
+    });
+  }, [navigation]);
+
+  const handleOnPress = (contact) => {
+    navigation.push('ContactDetail', { contactId: contact.id });
+  };
 
   return (
     <Container>
@@ -37,4 +65,5 @@ export default function App() {
       />
     </Container>
   );
-}
+};
+export default ContactList;

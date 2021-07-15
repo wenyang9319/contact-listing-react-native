@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useLayoutEffect } from 'react';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Contact Detail</Text>
-      <StatusBar style='auto' />
-    </View>
-  );
-}
+import { Container, Divider } from './../../components/General';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import HeaderText from '../../components/HeaderText';
+import HeaderImage from '../../components/HeaderImage';
+
+const ContactDetail = ({ navigation, route = {} }) => {
+  const handleCancelButtonPressed = () => {
+    navigation.goBack();
+  };
+  const handleSaveButtonPressed = () => {
+    navigation.goBack();
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+      headerLeft: () => (
+        <HeaderText text='Cancel' handleOnPress={handleCancelButtonPressed} />
+      ),
+      headerRight: () => (
+        <HeaderText text='Save' handleOnPress={handleSaveButtonPressed} />
+      ),
+    });
+  }, [navigation]);
+
+  return <Container></Container>;
+};
+
+export default ContactDetail;
