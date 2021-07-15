@@ -9,7 +9,11 @@ import TextFieldRow from '../../components/TextFieldRow';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, ImageHolder } from './elements';
 
-import { startEditContact } from './../../store/contactSlice';
+import {
+  startEditContact,
+  setContact,
+  saveEditingContact,
+} from './../../store/contactSlice';
 
 const ContactDetail = ({ navigation, route = {} }) => {
   const dispatch = useDispatch();
@@ -27,10 +31,13 @@ const ContactDetail = ({ navigation, route = {} }) => {
     navigation.goBack();
   };
   const handleSaveButtonPressed = () => {
+    dispatch(saveEditingContact());
     navigation.goBack();
   };
 
-  const handleTextChanged = () => {};
+  const handleTextChanged = (key, text) => {
+    dispatch(setContact({ key, value: text }));
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -55,7 +62,6 @@ const ContactDetail = ({ navigation, route = {} }) => {
         defaultText={firstName}
       />
       <Divider />
-
       <TextFieldRow
         attribute='lastName'
         label='Last Name'
