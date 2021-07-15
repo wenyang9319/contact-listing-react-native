@@ -1,11 +1,27 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useEffect } from 'react';
 
-import { Container, Divider } from './../../components/General';
+import { Text } from 'react-native';
+import { Divider } from './../../components/General';
 
 import HeaderText from '../../components/HeaderText';
-import HeaderImage from '../../components/HeaderImage';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Header, ImageHolder } from './elements';
+
+import { startEditContact } from './../../store/contactSlice';
 
 const ContactDetail = ({ navigation, route = {} }) => {
+  const dispatch = useDispatch();
+
+  const {
+    editingContact: { email, lastName, firstName, phone },
+  } = useSelector((state) => state.contact);
+
+  useEffect(() => {
+    const { contactId } = route.params;
+    dispatch(startEditContact(contactId));
+  }, []);
+
   const handleCancelButtonPressed = () => {
     navigation.goBack();
   };
@@ -25,7 +41,17 @@ const ContactDetail = ({ navigation, route = {} }) => {
     });
   }, [navigation]);
 
-  return <Container></Container>;
+  return (
+    <Container>
+      <ImageHolder />
+      <Header>Main Information</Header>
+      <Text>{firstName}</Text>
+      <Text>{lastName}</Text>
+      <Header>Sub Information</Header>
+      <Text>{email}</Text>
+      <Text>{phone}</Text>
+    </Container>
+  );
 };
 
 export default ContactDetail;

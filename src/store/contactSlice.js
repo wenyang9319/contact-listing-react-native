@@ -12,8 +12,14 @@ const contactSlice = createSlice({
     refreshList(state) {
       state.contacts = contactList;
     },
+    startEditContact(state, action) {
+      const contact = state.contacts.find(
+        (contact) => contact.id == action.payload
+      );
+      state.editingContact = contact;
+    },
   },
 });
 
-export const { refreshList } = contactSlice.actions;
+export const { refreshList, startEditContact } = contactSlice.actions;
 export default contactSlice.reducer;
