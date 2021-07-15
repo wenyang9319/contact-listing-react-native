@@ -9,7 +9,6 @@ export const ImageHolder = styled.View`
 `;
 
 export const Wrapper = styled.TouchableOpacity`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   background-color: white;
